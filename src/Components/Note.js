@@ -1,66 +1,66 @@
 import "../Styles/Note.css";
-import React, { useState } from "react";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+// import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 function Note(props) {
-  // const [note, setNote] = useState({
-  //     title:"",
-  //     content:"",
-  // })
-
-  // const inputEvent = (e) => {
-
-  //     // const value = e.target.vlaue;
-  //     // const name = e.target.vlaue;
-
-  //     const {name, value} = e.target;   //object destructuring
-
-  //     // console.log(e.target.value);
-
-  //     setNote((prevData) => {
-  //         return {
-  //             ...prevData,   //spread operator
-  //             [name]: value,  // dynamically value change
-  //         };
-  //     });
-
-  //     console.log(note)
-  // };
-
   const deleteNote = () => {
     console.log("delete");
     props.deleteItem(props.id);
   };
-  return (
-    <div className="header">
-      <div className="note">
-        <h1> {props.title} </h1>
-        <p> {props.content} </p>
-        <button onClick={deleteNote}>delete</button>
-      </div>
 
-      {/* <div className="box">
-        <input
-          type="text"
-          name="title"
-        //   value={note.title}
-        //   onChange={inputEvent}
-          id=""
-          placeholder="Title"
-        />
-        <textarea
-          type="text"
-          name="content"
-        //   value={note.content}
-        //   onChange={inputEvent}
-          id=""
-          placeholder="write a note..."
-          rows=""
-          column=""
-        />
-        <button onClick={delEvent}>Delte</button>
-      </div> */}
-    </div>
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      maxWidth: 345,
+    },
+    media: {
+      height: 140,
+    },
+    margin: {
+      margin: theme.spacing(2, 40),
+    },
+  }));
+
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.root, classes.margin}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.title}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.content}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Edit
+        </Button>
+        <Button onClick={deleteNote} size="small" color="secondary">
+          Delete
+        </Button>
+      </CardActions>
+    </Card>
   );
+
+  // return (
+  //   <div className="header">
+  //     <div className="note">
+  //       <h1> {props.title} </h1>
+  //       <p> {props.content} </p>
+  //       <button onClick={deleteNote}>delete</button>
+  //     </div>
+  //   </div>
+  // );
 }
 
 export default Note;

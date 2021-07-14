@@ -1,67 +1,120 @@
-import "../Styles/Header.css";
-import React, {useState} from "react";
+import "../Styles/CreateNote.css";
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(3, 77),
+      width: "40ch",
+      color: "green",
+    },
+  },
+  margin: {
+    margin: theme.spacing(1, 31),
+  },
+  inputMargin: {
+    margin: theme.spacing(2, 0),
+  },
+}));
 
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     '& > *': {
+//       margin: theme.spacing(1),
+//     },
+//   },
+// }));
 
 function Header(props) {
+  const classes = useStyles();
 
-    const [note, setNote] = useState({
-        title:"",
-        content:"",
-    })
+  const [note, setNote] = useState({
+    title: "",
+    content: "",
+  });
 
-    const inputEvent = (e) => {
+  const inputEvent = (e) => {
+    // const value = e.target.vlaue;
+    // const name = e.target.vlaue;
 
-        // const value = e.target.vlaue;
-        // const name = e.target.vlaue;
+    const { name, value } = e.target; //object destructuring
 
-        const {name, value} = e.target;   //object destructuring
+    // console.log(e.target.value);
 
-        // console.log(e.target.value);
+    setNote((prevData) => {
+      return {
+        ...prevData, //spread operator
+        [name]: value, // dynamically value change
+      };
+    });
 
-        setNote((prevData) => {
-            return {
-                ...prevData,   //spread operator
-                [name]: value,  // dynamically value change
-            };
-        });
+    console.log(note);
+  };
 
-        console.log(note)
-    };
+  const addEvent = () => {
+    // console.log("add");
+    props.passNote(note);
+    setNote({
+      title: "",
+      content: "",
+    });
+  };
 
-    const addEvent = () => {
-      // console.log("add");
-      props.passNote(note)
-      setNote({
-        title:"",
-        content:"",
-      })
-    }
   return (
-    <div className="header">
+    <form className={classes.root} noValidate autoComplete="off">
       <div className="box">
-        <input
+        <TextField
+          // className={classes.margin}
+          style={{ width: "100%" }}
           type="text"
           name="title"
           value={note.title}
           onChange={inputEvent}
-          id=""
           placeholder="Title"
+          label="Title"
+          id="standard-size-normal"
+          defaultValue="Normal"
+          // id="outlined-basic" label="Outlined" variant="outlined"
         />
-        <textarea
+        <TextField
+          className={classes.inputMargin}
+          style={{ width: "100%" }}
           type="text"
           name="content"
           value={note.content}
           onChange={inputEvent}
-          id=""
           placeholder="write a note..."
-          rows=""
-          column=""
+          // rows=""
+          // column=""
+          // id="standard-basic"
+          label="content"
+          id="standard-multiline-static"
+          // label="Multiline"
+          multiline
+          rows={2}
+          defaultValue="Default Value"
         />
-        <button onClick={addEvent}>Add</button>
+
+        <Button className={classes.margin} onClick={addEvent} variant="contained" color="secondary">
+          Add
+        </Button>
       </div>
-    </div>
+    </form>
   );
 }
 
 export default Header;
+
+//   return (
+//     <form className={classes.root} noValidate autoComplete="off">
+//       <TextField id="standard-basic" label="Standard" />
+//       <TextField id="filled-basic" label="Filled" variant="filled" />
+//       <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+//     </form>
+//   );
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

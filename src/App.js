@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import CreateNote from "./Components/CreateNote";
 import Note from "./Components/Note";
+import Header from "./Components/Header";
 
 function App() {
   const [addItem, setAddItem] = useState([]);
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <CreateNote passNote={addNote} />
       {/* <Note /> */}
 
