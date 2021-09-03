@@ -29,6 +29,7 @@ function App() {
   return (
     <>
       <Header />
+      
       <CreateNote passNote={addNote} />
       {/* <Note /> */}
 

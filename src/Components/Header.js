@@ -66,9 +66,10 @@ export default function Header(props) {
     <React.Fragment>
       <CssBaseline />
 
-      <AppBar style={{ background: "yellow" }}>
+      {/* <AppBar style={{ background: "yellow" }}> */}
+      <AppBar color="secondary" >
         <Toolbar>
-          <Typography color="secondary"  variant="h5">
+          <Typography   variant="h5">
             Your Keeps
           </Typography>
         </Toolbar>

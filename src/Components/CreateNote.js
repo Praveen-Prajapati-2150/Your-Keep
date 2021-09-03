@@ -20,13 +20,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     '& > *': {
-//       margin: theme.spacing(1),
-//     },
-//   },
-// }));
 
 function Header(props) {
   const classes = useStyles();
@@ -39,9 +32,7 @@ function Header(props) {
   const inputEvent = (e) => {
     // const value = e.target.vlaue;
     // const name = e.target.vlaue;
-
     const { name, value } = e.target; //object destructuring
-
     // console.log(e.target.value);
 
     setNote((prevData) => {
